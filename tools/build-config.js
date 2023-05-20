@@ -1,4 +1,4 @@
-var filename = 'sealdice-js-ext.js'
+var filename = 'md5.js'
 
 module.exports = {
   dev: {
@@ -19,7 +19,7 @@ module.exports = {
     platform: "browser",
     tsconfig: "./tsconfig.json",
     color: true,
-    sourcemap: process.env.NODE_ENV === "production" ? false : true,
+    sourcemap: process.env.NODE_ENV !== "production",
     external: ['csharp', 'puerts'],
     target: 'es2020',
     treeShaking: true,

@@ -1,11 +1,11 @@
 {
-  "name": "a-long-story",
+  "name": "translate",
   "version": "1.0.0",
-  "description": "once upon a time, ...",
+  "description": "translate english to chinese",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
-  "repository": "https://github.com/sealdice/seal-swordworld",
-  "license": "Apache-2.0",
+  "repository": "https://github.com/Szzrain",
+  "license": "MIT",
   "keywords": [],
   "scripts": {
     "build": "cross-env NODE_ENV=production node tools/build.js",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@types/lodash-es": "^4.17.6",
     "esbuild": "^0.17.4",
+    "js-md5": "^0.7.3",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {

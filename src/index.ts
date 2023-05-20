@@ -1,20 +1,21 @@
-import { sample } from "lodash-es";
-import { nameList } from "./utils";
+// import { sample } from "lodash-es";
+// import { nameList } from "./utils";
+import md5 from "js-md5";
 
 function main() {
   // 注册扩展
-  let ext = seal.ext.find('test');
+  let ext = seal.ext.find('md5');
   if (!ext) {
-    ext = seal.ext.new('test', '木落', '1.0.0');
+    ext = seal.ext.new('md5', 'Searina', '1.0.0');
     seal.ext.register(ext);
   }
 
   // 编写指令
-  const cmdSeal = seal.ext.newCmdItemInfo();
-  cmdSeal.name = 'seal';
-  cmdSeal.help = '召唤一只海豹，可用.seal <名字> 命名';
+  const cmdmd5 = seal.ext.newCmdItemInfo();
+  cmdmd5.name = 'md5';
+  cmdmd5.help = '使用.md5 <内容> 生成<内容>的md5hash';
 
-  cmdSeal.solve = (ctx, msg, cmdArgs) => {
+  cmdmd5.solve = (ctx, msg, cmdArgs) => {
     let val = cmdArgs.getArgN(1);
     switch (val) {
       case 'help': {
@@ -23,16 +24,17 @@ function main() {
         return ret;
       }
       default: {
-        // 命令为 .seal XXXX，取第一个参数为名字
-        if (!val) val = sample(nameList); // 无参数，随机名字
-        seal.replyToSender(ctx, msg, `你抓到一只海豹！取名为${val}\n它的逃跑意愿为${Math.ceil(Math.random() * 100)}`);
+        let text = "";
+        cmdArgs.args.forEach(a => text = text + a + " ");
+        text = text.substring(0, text.length-1);
+        seal.replyToSender(ctx, msg, md5(text));
         return seal.ext.newCmdExecuteResult(true);
       }
     }
   }
 
   // 注册命令
-  ext.cmdMap['seal'] = cmdSeal;
+  ext.cmdMap['md5'] = cmdmd5;
 }
 
 main();
